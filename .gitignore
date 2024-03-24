@@ -1,0 +1,5 @@
+petstore-original/
+
+frontend/*
+serverless/.aws-sam/*
+*.toml

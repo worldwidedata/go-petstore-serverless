@@ -1,0 +1,134 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  samp-lambda-go-container
+
+  Sample Lambda function written in Go that can be deployed using SAM CLI. Using a custom container image.
+
+Parameters:
+  ApiStageName:
+    Default: v1
+    Description: Stage name for the API Gateway
+    Type: String
+
+Resources:
+  MyAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: !Ref ApiStageName
+
+  PetStoreDELETEFunctions:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 10
+      PackageType: Image
+      Events:
+        DeletePet:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyAPI
+            Method: delete
+            Path: /pet/{id}
+    Metadata:
+      Dockerfile: dockerfile
+      DockerContext: petstore-api-DELETE/
+      DockerTag: v1
+
+  PetStorePOSTFunctions:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 30
+      PackageType: Image
+      Events:
+        SavePet:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyAPI
+            Method: post
+            Path: /pet
+        UpdateWithFormaData:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyAPI
+            Method: post
+            Path: /pet/{id}
+        UploadImage:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyAPI
+            Method: post
+            Path: /pet/{id}/uploadImage
+    Metadata:
+      Dockerfile: dockerfile
+      DockerContext: petstore-api-POST/
+      DockerTag: v1
+
+  PetStorePUTunctions:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 30
+      PackageType: Image
+      Events:
+        DeletePet:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyAPI
+            Method: put
+            Path: /pet
+    Metadata:
+      Dockerfile: dockerfile
+      DockerContext: petstore-api-PUT/
+      DockerTag: v1
+
+  PetStoreGETunctions:
+    Type: AWS::Serverless::Function
+    Properties:
+      Timeout: 30
+      PackageType: Image
+      Events:
+        DeletePet:
+          Type: Api
+          Properties:
+            RestApiId: !Ref MyAPI
+            Method: get
+            Path: /pet/{id}
+    Metadata:
+      Dockerfile: dockerfile
+      DockerContext: petstore-api-PUT/
+      DockerTag: v1
+  
+  LambdaBasicExecutionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: LambdaBasicExecutionRole
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Effect: Allow
+                Action:
+                  - rds-data:*
+                Resource: "*"
+
+Outputs:
+  MyAPIGateway:
+    Description: "API Gateway endpoint URL for Staging stage for Hello World function"
+    Value: !Sub "https://${MyAPI}.execute-api.${AWS::Region}.amazonaws.com/${ApiStageName}/"
+
+  MyAPIGatewayRestApiId:
+    Description: "API Gateway ARN for Basic AWS API Gateway"
+    Value: !Ref MyAPI
+    Export:
+      Name: MyAPI-RestApiId
+
+  PetSoreAWSApiGatewayRootResourceId:
+    Value: !GetAtt MyAPI.RootResourceId
+    Export:
+      Name: MyAPI-RootResourceId
