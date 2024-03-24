@@ -3,26 +3,23 @@
 
 ## Usefull Links.
 ### Demos Available
-1 - PetStore API - [Link](https://github.com/deepmap/oapi-codegen/tree/master/examples/petstore-expanded/gin) to documentation for a pet store API
-2 - go-Swagger PetStore Example [Link](https://github.com/go-swagger/go-swagger/tree/master/examples/2.0/petstore/server)
-3 - Book Store Example - [Link](https://pkg.go.dev/github.com/hairizuanbinnoorazman/golang-web-gin-book-store#section-readme)
-4 - GIN & React web app - [Link](https://github.com/southwolf/gin-react-demo?tab=readme-ov-file)
-5 - React PetStore FrontEnd [Link](https://github.com/chubbyts/react-petstore/tree/master/src)
-6 - Petstore [link](https://github.com/deepmap/oapi-codegen/tree/master/examples/petstore-expanded/gin/api)
-7 - Petstore gin [link](https://github.com/OpenAPITools/openapi-generator/blob/master/samples/server/petstore/go-gin-api-server/go/README.md)
-
-### Talk Resources
-**Github project** - [Link](Link goes here)
+1. PetStore API - [Link](https://github.com/deepmap/oapi-codegen/tree/master/examples/petstore-expanded/gin) to documentation for a pet store API
+2. go-Swagger PetStore Example [Link](https://github.com/go-swagger/go-swagger/tree/master/examples/2.0/petstore/server)
+3.Book Store Example - [Link](https://pkg.go.dev/github.com/hairizuanbinnoorazman/golang-web-gin-book-store#section-readme)
+4. GIN & React web app - [Link](https://github.com/southwolf/gin-react-demo?tab=readme-ov-file)
+5. React PetStore FrontEnd [Link](https://github.com/chubbyts/react-petstore/tree/master/src)
+6. Petstore [link](https://github.com/deepmap/oapi-codegen/tree/master/examples/petstore-expanded/gin/api)
+7. Petstore gin [link](https://github.com/OpenAPITools/openapi-generator/blob/master/samples/server/petstore/go-gin-api-server/go/README.md)
 
 # Introduction
 This project is born from a AWS MeetUp Group talk about Go and Serverless microservice architecture. I used this as an example [link](goes-here), so thank you to @yannhe. 
 
 # Technology
-    1. Docker
-    2. GoLang
-    3. AWS Lambda
-    4. API Gateway
-    5. AWS SAM
+1. Docker
+2. GoLang
+3. AWS Lambda
+4. API Gateway
+5. AWS SAM
 
 # Concepts
 To demostrate how one to used GO and lambda to create a serverless architecture from a monolith service i broke down the initial repo into the 4 lambda functions (GET,DELETE,POST,PUT). Although not a real world scnerio it clearly demonstrates how you can take a project and separate into microservices so the restAPI methods were used ad the sorting method but in a real project this would be something like user registration , fetch data from database , etc ...
